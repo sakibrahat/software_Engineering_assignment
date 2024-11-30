@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create/Update Item</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background: #ffffff;
+        padding: 20px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #0073e6;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      button {
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #005bb5;
+      }
+
+      button:active {
+        background-color: #004494;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Corrected conditional title -->
+      <h1>{% if item %} {{ item.name }} {% else %} Create Item {% endif %}</h1>
+
+      <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          name="name"
+          value="{% if item %}{{ item.name }}{% endif %}"
+          required
+        />
+        <label for="description">Description:</label>
+        <textarea name="description" required>
+{% if item %}{{ item.description }}{% endif %}</textarea
+        >
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </body>
+</html>
